@@ -1,13 +1,8 @@
 import React from "react";
 import pf from "petfinder-client";
 import Pet from "./Pet";
-
-// Class Components
-// More flexibility and access to more powerful features.
-// Every component is  its own world
-// Every Com ponent should be on its own file
-// Use Airbnb Eslint rules
-// Props: Immutable. States: Mutable
+import SearchBox from "./SearchBox";
+import { Consumer } from "./SearchContext";
 
 const petfinder = pf({
   key: process.env.API_KEY,
@@ -26,8 +21,16 @@ class Results extends React.Component {
   }
 
   componentDidMount() {
+    this.search();
+  }
+  search = () => {
     petfinder.pet
-      .find({ output: "full", location: "Seattle, WA" })
+      .find({
+        output: "full",
+        location: this.props.searchParams.location,
+        animal: this.props.searchParams.animal,
+        breed: this.props.searchParams.breed
+      })
       .then(data => {
         let pets;
 
@@ -46,13 +49,14 @@ class Results extends React.Component {
           loading: true
         });
       });
-  }
+  };
   render() {
     if (this.state.loading === false) {
       return <h1>Loading All Pets...</h1>;
     }
     return (
       <div className="search">
+        <SearchBox search={this.search} />
         {this.state.pets.map(pet => {
           let breed;
 
@@ -78,46 +82,10 @@ class Results extends React.Component {
   }
 }
 
-export default Results;
-
-// return React.createElement("div", { onClick: this.handleTitleClick }, [
-//   React.createElement("h1", {}, "Adopt Me!"),
-//   React.createElement(Pet, {
-//     name: "Luna",
-//     animal: "Dog",
-//     breed: "Poodle "
-//   }),
-//   React.createElement(Pet, {
-//     name: "Pepper",
-//     animal: "Bird",
-//     breed: "Cockatiel "
-//   }),
-//   React.createElement(Pet, {
-//     name: "Doink",
-//     animal: "Cat",
-//     breed: "Mixed "
-//   })
-// ]);
-
-// {} for properties of the div
-// Function Components -- Function that does extend components
-// const App = () => {
-//     return React.createElement("div", {}, [
-//         React.createElement('h1', {}, 'Adopt Me!'),
-//         React.createElement(Pet, {
-//             name: "Luna",
-//             animal: "Dog",
-//             breed: "Poodle "
-//         }),
-//         React.createElement(Pet, {
-//             name: "Pepper",
-//             animal: "Bird",
-//             breed: "Cockatiel "
-//         }),
-//         React.createElement(Pet, {
-//             name: "Doink",
-//             animal: "Cat",
-//             breed: "Mixed "
-//         })
-//     ])
-// }
+export default function ResultsWithContext(props) {
+  return (
+    <Consumer>
+      {context => <Results {...props} searchParams={context} />}
+    </Consumer>
+  );
+}
