@@ -11,10 +11,13 @@ class Pet extends React.Component {
       photos = media.photos.photo.filter(photo => photo["@size"] === "pn");
     }
 
+    // If Photo doesn't exist
+    const hero = photos[0] ? photos[0].value : "http://placecorgi.com/300/300";
+
     return (
       <Link to={`/details/${id}`} className="pet">
         <div className="image-container">
-          <img src={photos[0]} alt={name} />
+          <img src={hero} alt={name} />
         </div>
         <div className="info">
           <h1>{name}</h1>

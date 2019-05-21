@@ -19,9 +19,8 @@ yarn install
 You can run the application using the `start` script task provided in the package.json file.
 
 ```bash
-npm run start
-# or
-yarn start
+npm run dev
+
 ```
 
 Ensure that you have a `.env` file in the root of the project that specifies environment variables to use. 
