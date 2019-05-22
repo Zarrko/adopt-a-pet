@@ -1,6 +1,7 @@
 import React from "react";
 import pf from "petfinder-client";
 import Carousel from "./Carousel";
+import Modal from "./Modal";
 
 const petfinder = pf({
   key: process.env.API_KEY,
@@ -9,8 +10,11 @@ const petfinder = pf({
 
 class Details extends React.Component {
   state = {
-    loading: true
+    loading: true,
+    showModal: true
   };
+
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
   componentDidMount() {
     petfinder.pet
@@ -47,18 +51,40 @@ class Details extends React.Component {
     if (this.state.loading) {
       return <h1>Loading ...</h1>;
     }
-    const { name, animal, breed, location, description, media } = this.state;
+    const {
+      name,
+      animal,
+      breed,
+      location,
+      description,
+      media,
+      showModal
+    } = this.state;
 
     return (
+      /* eslint-disable */
       <div className="details">
         <Carousel media={media} />
-
-        <div>
+        <div
+          onClick={console.log(
+            "I can catch events out of Modal here as much as it is in a different part of DOM"
+          )}
+        >
           <h1>{name}</h1>
           <h2>
             {animal} - {breed} - {location}
           </h2>
+          <button onClick={this.toggleModal}> Adopt {name}</button>
           <p>{description}</p>
+          {showModal ? (
+            <Modal>
+              <h1> Would you like to Adopt {name}?</h1>
+              <div className="buttons">
+                <button onClick={this.toggleModal}> Yes </button>
+                <button onClick={this.toggleModal}> Hell Yes!!!! </button>
+              </div>
+            </Modal>
+          ) : null}
         </div>
       </div>
     );
