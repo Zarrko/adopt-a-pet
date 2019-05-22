@@ -33,3 +33,24 @@ API_KEY = <API_KEY>
 API_SECRET=<API_SECRET>
 ```
 > Ensure you have the correct API_KEY and API_SECRET from petfinder.com
+
+## Running tests (Low Confidence Tests)
+
+```bash
+npm test
+
+```
+
+To update a Snapshot (Go easy on them...)
+```bash
+npm run test:update
+
+```
+
+### Run tests interavtively
+```bash
+npm run test:watch
+
+```
+
+
