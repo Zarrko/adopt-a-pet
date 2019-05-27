@@ -53,4 +53,8 @@ npm run test:watch
 
 ```
 
+### Code Splitting
+Use Loadable when when file size are extremely large usually when large libraries have been imported. 
+Otherwise, it just adds Latency and makes debugging difficult when files are small in size. 
+
 
