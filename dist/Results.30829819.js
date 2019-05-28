@@ -215,13 +215,9 @@ var _Pet = _interopRequireDefault(require("./Pet"));
 
 var _SearchBox = _interopRequireDefault(require("./SearchBox"));
 
-var _SearchContext = require("./SearchContext");
-
 var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -263,8 +259,8 @@ function (_React$Component) {
       petfinder.pet.find({
         output: "full",
         location: _this.props.location,
-        animal: _this.props.searchParams.animal,
-        breed: _this.props.searchParams.breed
+        animal: _this.props.animal,
+        breed: _this.props.breed
       }).then(function (data) {
         var pets;
 
@@ -331,27 +327,24 @@ function (_React$Component) {
   }]);
 
   return Results;
-}(_react.default.Component);
+}(_react.default.Component); // Coming from redux
 
-function ResultsWithContext(props) {
-  return _react.default.createElement(_SearchContext.Consumer, null, function (context) {
-    return _react.default.createElement(Results, _extends({}, props, {
-      searchParams: context
-    }));
-  });
-}
 
 var mapStateToProps = function mapStateToProps(_ref) {
-  var location = _ref.location;
+  var location = _ref.location,
+      breed = _ref.breed,
+      animal = _ref.animal;
   return {
-    location: location
+    location: location,
+    animal: animal,
+    breed: breed
   };
 };
 
-var _default = (0, _reactRedux.connect)(mapStateToProps)(ResultsWithContext);
+var _default = (0, _reactRedux.connect)(mapStateToProps)(Results);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","petfinder-client":"../node_modules/petfinder-client/index.js","./Pet":"Pet.js","./SearchBox":"SearchBox.js","./SearchContext":"SearchContext.js","react-redux":"../node_modules/react-redux/es/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","petfinder-client":"../node_modules/petfinder-client/index.js","./Pet":"Pet.js","./SearchBox":"SearchBox.js","react-redux":"../node_modules/react-redux/es/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -379,7 +372,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54545" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53510" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
