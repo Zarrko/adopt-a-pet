@@ -205,7 +205,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = ResultsWithContext;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -216,6 +216,8 @@ var _Pet = _interopRequireDefault(require("./Pet"));
 var _SearchBox = _interopRequireDefault(require("./SearchBox"));
 
 var _SearchContext = require("./SearchContext");
+
+var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -260,7 +262,7 @@ function (_React$Component) {
     _this.search = function () {
       petfinder.pet.find({
         output: "full",
-        location: _this.props.searchParams.location,
+        location: _this.props.location,
         animal: _this.props.searchParams.animal,
         breed: _this.props.searchParams.breed
       }).then(function (data) {
@@ -338,7 +340,18 @@ function ResultsWithContext(props) {
     }));
   });
 }
-},{"react":"../node_modules/react/index.js","petfinder-client":"../node_modules/petfinder-client/index.js","./Pet":"Pet.js","./SearchBox":"SearchBox.js","./SearchContext":"SearchContext.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var location = _ref.location;
+  return {
+    location: location
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps)(ResultsWithContext);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","petfinder-client":"../node_modules/petfinder-client/index.js","./Pet":"Pet.js","./SearchBox":"SearchBox.js","./SearchContext":"SearchContext.js","react-redux":"../node_modules/react-redux/es/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -366,7 +379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62091" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54545" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
