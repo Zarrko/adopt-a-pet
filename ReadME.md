@@ -47,7 +47,7 @@ npm run test:update
 
 ```
 
-### Run tests interavtively
+### Run tests interactively
 ```bash
 npm run test:watch
 
@@ -56,5 +56,25 @@ npm run test:watch
 ### Code Splitting
 Use Loadable when when file size are extremely large usually when large libraries have been imported. 
 Otherwise, it just adds Latency and makes debugging difficult when files are small in size. 
+
+## Converting to TypeScript
+Install TS
+```bash
+npm install -D typescript
+
+```
+Init Project with TS
+```bash
+npx tsc --init
+
+```
+
+TS Definitions
+```bash
+npm install -D @types/react @types/react-dom @types/reach__router
+
+```
+
+When converting to TS always start with Self Contained Components like `modal.js`
 
 
